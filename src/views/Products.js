@@ -4,7 +4,6 @@ import { useHistory } from 'react-router-dom';
 import { CategoryContext } from '../context/ProductCategoryContext';
 import ProductItem from '../component/ProductItem';
 import SideNav from '../component/SideNav';
-import NavDropdown from '../component/NavDropdown';
 
 const ProductStyles = styled.div`
   display: grid;
