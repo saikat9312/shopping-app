@@ -1,6 +1,8 @@
-# XT Shopping Cart Assignment
+# Shopping Cart
 
-This is the base folder for the shopping cart exercise. You will have all the static assets and mock server responses available in this repo.
+This is a basic e-commerce web app. Follow the below instructions to start the server.
+
+**Note:** Navigate to `frontend` folder and follow the `REACDME.md` file for further instructions.
 
 ## Getting Started
 
