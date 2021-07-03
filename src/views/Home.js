@@ -41,24 +41,22 @@ export default function Home() {
 
   React.useEffect(() => {
     (async function getImage() {
-      const data = await fetch('./server/banners/index.get.json', {
+      const data = await fetch('./api/banners/index.get.json', {
         headers: {
           'Content-Type': 'application/json',
           Accept: 'application/json',
         },
       }).then((res) => res.json());
-      console.log('BANNERS::', data);
       setCarouselData(data);
     })();
 
     (async function getItems() {
-      const data = await fetch('./server/categories/index.get.json', {
+      const data = await fetch('./api/categories/index.get.json', {
         headers: {
           'Content-Type': 'application/json',
           Accept: 'application/json',
         },
       }).then((res) => res.json());
-      console.log('CATEGORIES::', data);
       setItemData(data);
     })();
   }, []);

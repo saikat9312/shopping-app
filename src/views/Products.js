@@ -28,13 +28,12 @@ export default function Products() {
 
   React.useEffect(() => {
     (async function getImage() {
-      const data = await fetch('./server/products/index.get.json', {
+      const data = await fetch('./api/products/index.get.json', {
         headers: {
           'Content-Type': 'application/json',
           Accept: 'application/json',
         },
       }).then((res) => res.json());
-      console.log('PRODUCTS::', data);
       setProductData(data);
       setFilterData(data);
     })();

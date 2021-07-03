@@ -1,6 +1,6 @@
 # Shopping Cart
 
-This is a basic e-commerce web app. Follow the below instructions to start the server.
+This is a basic e-commerce web app. Follow the below instructions to start the api.
 
 # Getting Started with Create React App
 

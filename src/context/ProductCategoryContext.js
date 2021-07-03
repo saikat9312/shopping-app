@@ -7,13 +7,12 @@ const CategoryContextProvider = ({ children }) => {
 
   React.useEffect(() => {
     (async function getImage() {
-      const data = await fetch('./server/categories/index.get.json', {
+      const data = await fetch('./api/categories/index.get.json', {
         headers: {
           'Content-Type': 'application/json',
           Accept: 'application/json',
         },
       }).then((res) => res.json());
-      console.log('CATEGORIES::', data);
       setCategoryData(data);
     })();
   }, []);
