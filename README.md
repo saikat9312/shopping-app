@@ -2,7 +2,7 @@
 
 This is a basic e-commerce web app. Follow the below instructions to start the server.
 
-**Note:** Navigate to `frontend` folder and follow the `REACDME.md` file for further instructions.
+**Note:** If required, navigate to `frontend` folder and follow the `REACDME.md` file for further instructions.
 
 ## Getting Started
 
