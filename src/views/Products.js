@@ -27,10 +27,14 @@ export default function Products() {
   const { categoryData } = useContext(CategoryContext);
 
   React.useEffect(() => {
-    (async function getProducts() {
-      const data = await fetch('http://localhost:5000/products').then((res) =>
-        res.json()
-      );
+    (async function getImage() {
+      const data = await fetch('./server/products/index.get.json', {
+        headers: {
+          'Content-Type': 'application/json',
+          Accept: 'application/json',
+        },
+      }).then((res) => res.json());
+      console.log('PRODUCTS::', data);
       setProductData(data);
       setFilterData(data);
     })();

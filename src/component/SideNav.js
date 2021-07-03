@@ -7,7 +7,6 @@ const SideNavStyles = styled.aside`
   button {
     padding: 10px 20px;
     text-decoration: none;
-    font-size: 12px;
     text-align: left;
     display: block;
     /* color: black; */
@@ -76,12 +75,10 @@ export default function SideNav({
     let el = document.querySelector('.Categories');
     !isOpen ? (el.style.display = 'none') : (el.style.display = 'block');
   };
-  //console.log('selectedFilter, categoryData: ', selectedFilter, categoryData);
   return (
     <SideNavStyles itemNum={itemNum}>
       <button className='DropButton' onClick={handleDropdown}>
         {selectedFilter !== '' ? selectedFilter : 'Select a category'}
-        {/* <i className='arrow down'></i> */}
         <span className='DownArrow'>{'>'}</span>
       </button>
       <div className='Categories'>

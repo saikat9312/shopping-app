@@ -6,10 +6,14 @@ const CategoryContextProvider = ({ children }) => {
   const [categoryData, setCategoryData] = useState([]);
 
   React.useEffect(() => {
-    (async function getCategory() {
-      const data = await fetch('http://localhost:5000/categories').then((res) =>
-        res.json()
-      );
+    (async function getImage() {
+      const data = await fetch('./server/categories/index.get.json', {
+        headers: {
+          'Content-Type': 'application/json',
+          Accept: 'application/json',
+        },
+      }).then((res) => res.json());
+      console.log('CATEGORIES::', data);
       setCategoryData(data);
     })();
   }, []);
