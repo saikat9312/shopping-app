@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
-import CartItem from '../component/CartItem';
+import CartItem from '../component/fragments/CartItem';
 import { CartContext } from '../context/CartContext';
 
 const CartStyles = styled.div`

@@ -1,8 +1,8 @@
 import React, { useContext } from 'react';
 import styled from 'styled-components';
 
-import { PlusCircleIcon, MinusCircleIcon, TrashIcon } from '../component/icons';
-import { CartContext } from '../context/CartContext';
+import { PlusCircleIcon, MinusCircleIcon, TrashIcon } from '../icons';
+import { CartContext } from '../../context/CartContext';
 
 const CartItemStyles = styled.div`
   display: flex;

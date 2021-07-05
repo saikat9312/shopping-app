@@ -1,10 +1,11 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import styled from 'styled-components';
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 
-import HomeItem from '../component/HomeItem';
+import HomeItem from '../component/fragments/HomeItem';
+import { CategoryContext } from '../context/ProductCategoryContext';
 
 const HomeStyles = styled.div`
   margin: 3rem;
@@ -28,7 +29,8 @@ const HomeStyles = styled.div`
 `;
 export default function Home() {
   const [carouselData, setCarouselData] = React.useState([]);
-  const [itemData, setItemData] = React.useState([]);
+  const { categoryData } = useContext(CategoryContext);
+
   var settings = {
     dots: true,
     infinite: true,
@@ -41,23 +43,10 @@ export default function Home() {
 
   React.useEffect(() => {
     (async function getImage() {
-      const data = await fetch('./api/banners/index.get.json', {
-        headers: {
-          'Content-Type': 'application/json',
-          Accept: 'application/json',
-        },
-      }).then((res) => res.json());
+      const data = await fetch('./api/banners/index.get.json').then((res) =>
+        res.json()
+      );
       setCarouselData(data);
-    })();
-
-    (async function getItems() {
-      const data = await fetch('./api/categories/index.get.json', {
-        headers: {
-          'Content-Type': 'application/json',
-          Accept: 'application/json',
-        },
-      }).then((res) => res.json());
-      setItemData(data);
     })();
   }, []);
 
@@ -73,7 +62,7 @@ export default function Home() {
         ))}
       </Slider>
 
-      {itemData.map(
+      {categoryData.map(
         (item) => item.enabled && <HomeItem key={item.id} item={item} />
       )}
     </HomeStyles>

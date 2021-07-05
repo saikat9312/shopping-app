@@ -1,8 +1,8 @@
 import React, { useContext } from 'react';
 import styled from 'styled-components';
 
-import { PlusCircleIcon, MinusCircleIcon, TrashIcon } from '../component/icons';
-import { CartContext } from '../context/CartContext';
+import { PlusCircleIcon, MinusCircleIcon, TrashIcon } from '../icons';
+import { CartContext } from '../../context/CartContext';
 
 const ProductItemStyles = styled.div`
   display: flex;
@@ -41,11 +41,11 @@ const ProductItemStyles = styled.div`
       font-size: 1rem;
     }
     button {
-      width: 10rem;
+      width: rem;
       height: 3rem;
     }
     .shortButton {
-      width: 3rem;
+      width: 2.6rem;
     }
   }
   @media only screen and (min-width: 600px) {
@@ -89,7 +89,7 @@ const ProductItemStyles = styled.div`
   }
 `;
 
-export default function ProductItem({ product }) {
+export default function ProductItem({ product, handleAlert }) {
   const { addProduct, cartItems, increase, decrease, removeProduct } =
     useContext(CartContext);
 
@@ -100,6 +100,16 @@ export default function ProductItem({ product }) {
   const qty = cartItems
     .map((item) => (item.id === product.id ? item.quantity : null))
     .filter((e) => e !== null)[0];
+
+  const handleAddToCart = () => {
+    (async function getProducts() {
+      const data = await fetch('./api/addToCart/index.post.json').then((res) =>
+        res.json()
+      );
+      handleAlert(data.response, data.responseMessage);
+      addProduct(product);
+    })();
+  };
 
   return (
     <ProductItemStyles className='ProductItem'>
@@ -144,7 +154,7 @@ export default function ProductItem({ product }) {
 
           {!isInCart(product) && (
             <button
-              onClick={() => addProduct(product)}
+              onClick={() => handleAddToCart(product)}
               className='btn btn-primary btn-sm'>
               Buy Now
             </button>

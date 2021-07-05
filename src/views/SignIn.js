@@ -34,27 +34,6 @@ const Form = styled.form`
   padding: 10px;
   font-size: 1.5rem;
   line-height: 1.5;
-  label {
-    display: block;
-    margin-bottom: 1rem;
-  }
-  &:focus {
-    color: var(--lightblue);
-  }
-  input,
-  textarea,
-  select {
-    width: 100%;
-    padding: 0.5rem;
-    font-size: 1rem;
-    border: none;
-    margin-bottom: 3rem;
-    border-bottom: 2px solid var(--lightGray);
-    &:focus {
-      outline: 0;
-      border-color: var(--lightblue);
-    }
-  }
   fieldset {
     display: flex;
     flex-direction: column;
@@ -62,9 +41,47 @@ const Form = styled.form`
     width: 100%;
     border: 0;
     padding: 0;
-
     &[disabled] {
       opacity: 0.5;
+    }
+    .field-group {
+      display: flex;
+      flex-direction: column-reverse;
+      width: 100%;
+      text-align: left;
+      label {
+        color: var(--lightblue);
+        position: relative;
+        opacity: 0;
+        bottom: -5px;
+        transition: 0.6s opacity;
+      }
+      input,
+      textarea,
+      select {
+        width: 100%;
+        padding: 0.5rem;
+        font-size: 1rem;
+        border: none;
+        margin-bottom: 3rem;
+        border-bottom: 2px solid var(--lightGray);
+        ::placeholder {
+          color: var(--lightGray);
+          transition: 0.6s color;
+        }
+        &:focus {
+          outline: 0;
+          border-color: var(--lightblue);
+          ::placeholder {
+            color: transparent;
+            transition: 0.6s color;
+          }
+          + label {
+            opacity: 1;
+            transition: 0.6s opacity;
+          }
+        }
+      }
     }
   }
 `;
@@ -98,25 +115,29 @@ export default function SignIn() {
       </div>
       <Form method='POST' onSubmit={handleSubmit}>
         <fieldset>
-          <label htmlFor='email'>Email</label>
-          <input
-            type='email'
-            name='email'
-            placeholder='Your Email Address'
-            autoComplete='email'
-            value={inputs.email}
-            onChange={handleChange}
-          />
+          <div className='field-group'>
+            <input
+              type='email'
+              name='email'
+              placeholder='Email'
+              autoComplete='email'
+              value={inputs.email}
+              onChange={handleChange}
+            />
+            <label htmlFor='email'>Email</label>
+          </div>
 
-          <label htmlFor='password'>Password</label>
-          <input
-            type='password'
-            name='password'
-            placeholder='Password'
-            autoComplete='password'
-            value={inputs.password}
-            onChange={handleChange}
-          />
+          <div className='field-group'>
+            <input
+              type='password'
+              name='password'
+              placeholder='Password'
+              autoComplete='password'
+              value={inputs.password}
+              onChange={handleChange}
+            />
+            <label htmlFor='password'>Password</label>
+          </div>
           <button>Login</button>
         </fieldset>
       </Form>

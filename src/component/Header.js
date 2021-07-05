@@ -1,9 +1,16 @@
 import React from 'react';
 import styled from 'styled-components';
-import Nav from './Nav';
+import Nav from './fragments/Nav';
 
 const HeaderStyles = styled.header`
+  height: 7rem;
   .bar {
+    height: 7rem;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    background: white;
+    z-index: 100;
     display: flex;
     justify-content: space-between;
     align-items: stretch;
@@ -12,6 +19,9 @@ const HeaderStyles = styled.header`
       margin: 0%;
       padding-top: 3%;
       padding-left: 1%;
+      img {
+        height: 3rem;
+      }
     }
   }
   @media only screen and (min-width: 600px) {
@@ -19,6 +29,9 @@ const HeaderStyles = styled.header`
       margin: 0%;
       padding-top: 1%;
       padding-left: 10%;
+      img {
+        height: 5rem;
+      }
     }
   }
 `;

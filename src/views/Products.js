@@ -1,9 +1,10 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import styled from 'styled-components';
 import { useHistory } from 'react-router-dom';
 import { CategoryContext } from '../context/ProductCategoryContext';
-import ProductItem from '../component/ProductItem';
-import SideNav from '../component/SideNav';
+import ProductItem from '../component/fragments/ProductItem';
+import SideNav from '../component/fragments/SideNav';
+import Alert from '../component/Alert';
 
 const ProductStyles = styled.div`
   display: grid;
@@ -15,24 +16,23 @@ const ProductStyles = styled.div`
     grid-template-columns: repeat(5, 18%);
     margin: 0 10%;
   }
-  @media only screen and (min-width: 1200px) {
-  }
 `;
 
 export default function Products() {
   const [productData, setProductData] = React.useState([]);
   const [filterData, setFilterData] = React.useState([]);
+
+  const [showAlert, setShowAlert] = useState(false);
+  const [alertData, setAlertData] = useState({});
+
   const history = useHistory();
   const { categoryData } = useContext(CategoryContext);
 
   React.useEffect(() => {
-    (async function getImage() {
-      const data = await fetch('./api/products/index.get.json', {
-        headers: {
-          'Content-Type': 'application/json',
-          Accept: 'application/json',
-        },
-      }).then((res) => res.json());
+    (async function getProducts() {
+      const data = await fetch('./api/products/index.get.json').then((res) =>
+        res.json()
+      );
       setProductData(data);
       setFilterData(data);
     })();
@@ -52,9 +52,17 @@ export default function Products() {
       productData.filter((item) => item.category === filterObj[0].id);
     setFilterData(tempData);
   };
+  const handleAlert = (type, message) => {
+    setAlertData({ type, message });
+    setShowAlert(true);
+    setTimeout(() => {
+      setShowAlert(false);
+    }, 3000);
+  };
 
   return (
     <ProductStyles className='Products'>
+      {showAlert ? <Alert {...alertData} /> : null}
       <SideNav
         itemNum={productData.length}
         handleSelect={handleSelect}
@@ -64,7 +72,11 @@ export default function Products() {
       {filterData.length ? (
         filterData.map((product) =>
           product.stock > 0 ? (
-            <ProductItem key={product.id} product={product} />
+            <ProductItem
+              key={product.id}
+              product={product}
+              handleAlert={handleAlert}
+            />
           ) : null
         )
       ) : (
