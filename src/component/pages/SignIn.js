@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
-import { useHistory } from 'react-router-dom';
-import styled from 'styled-components';
-import { login } from '../lib/util';
+import React, { useState } from "react";
+import { useHistory } from "react-router-dom";
+import styled from "styled-components";
+import { login } from "../../lib/util";
 
 const SignInStyles = styled.div`
   .login-text {
@@ -87,7 +87,7 @@ const Form = styled.form`
 `;
 
 export default function SignIn() {
-  const [inputs, setInputs] = useState({ email: '', password: '' });
+  const [inputs, setInputs] = useState({ email: "", password: "" });
   const history = useHistory();
   const handleChange = (e) => {
     setInputs({ ...inputs, [e.target.name]: e.target.value });
@@ -97,46 +97,46 @@ export default function SignIn() {
     e.preventDefault();
     let isLogged = login(inputs);
     if (isLogged) {
-      localStorage && localStorage.setItem('isLoggedIn', JSON.stringify(true));
-      history.push('/', isLogged);
+      localStorage && localStorage.setItem("isLoggedIn", JSON.stringify(true));
+      history.push("/", isLogged);
       window.location.reload();
     } else {
-      alert('Please register or enter valid credentials');
+      alert("Please register or enter valid credentials");
     }
   };
 
   return (
     <SignInStyles>
-      <div className='login-text'>
+      <div className="login-text">
         <div>
           <h2>Login</h2>
         </div>
         <h5>Get access to your Orders, Wishlist and Recommendations</h5>
       </div>
-      <Form method='POST' onSubmit={handleSubmit}>
+      <Form method="POST" onSubmit={handleSubmit}>
         <fieldset>
-          <div className='field-group'>
+          <div className="field-group">
             <input
-              type='email'
-              name='email'
-              placeholder='Email'
-              autoComplete='email'
+              type="email"
+              name="email"
+              placeholder="Email"
+              autoComplete="email"
               value={inputs.email}
               onChange={handleChange}
             />
-            <label htmlFor='email'>Email</label>
+            <label htmlFor="email">Email</label>
           </div>
 
-          <div className='field-group'>
+          <div className="field-group">
             <input
-              type='password'
-              name='password'
-              placeholder='Password'
-              autoComplete='password'
+              type="password"
+              name="password"
+              placeholder="Password"
+              autoComplete="new-password"
               value={inputs.password}
               onChange={handleChange}
             />
-            <label htmlFor='password'>Password</label>
+            <label htmlFor="password">Password</label>
           </div>
           <button>Login</button>
         </fieldset>

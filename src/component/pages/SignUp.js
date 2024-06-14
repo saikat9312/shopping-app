@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
-import { useHistory } from 'react-router';
-import styled from 'styled-components';
+import React, { useState } from "react";
+import { useHistory } from "react-router";
+import styled from "styled-components";
 
 const SignUpStyles = styled.div`
   .login-text {
@@ -87,11 +87,11 @@ const Form = styled.form`
 
 export default function SignUp() {
   const [inputs, setInputs] = useState({
-    firstname: '',
-    lastname: '',
-    email: '',
-    password: '',
-    'confirm-password': '',
+    firstname: "",
+    lastname: "",
+    email: "",
+    password: "",
+    "confirm-password": "",
   });
 
   const history = useHistory();
@@ -104,77 +104,77 @@ export default function SignUp() {
     e.preventDefault();
     alert(`User ${inputs.firstname} registered successfully`);
 
-    let userDB = JSON.parse(localStorage && localStorage.getItem('users'));
+    let userDB = JSON.parse(localStorage && localStorage.getItem("users"));
     userDB.push(inputs);
-    localStorage && localStorage.setItem('users', JSON.stringify(userDB));
+    localStorage && localStorage.setItem("users", JSON.stringify(userDB));
 
-    history.push('/signin');
+    history.push("/signin");
   };
 
   return (
     <SignUpStyles>
-      <div className='login-text'>
+      <div className="login-text">
         <div>
           <h2>Signup</h2>
         </div>
         <h5>We do not share your personal details with anyone</h5>
       </div>
-      <Form method='POST' onSubmit={handleSubmit}>
+      <Form method="POST" onSubmit={handleSubmit}>
         <fieldset>
-          <div className='field-group'>
+          <div className="field-group">
             <input
-              type='text'
-              name='firstname'
-              placeholder=' First Name'
-              autoComplete='firstname'
+              type="text"
+              name="firstname"
+              placeholder=" First Name"
+              autoComplete="given-name"
               value={inputs.fisrName}
               onChange={handleChange}
             />
-            <label htmlFor='firstname'>First Name</label>
+            <label htmlFor="firstname">First Name</label>
           </div>
-          <div className='field-group'>
+          <div className="field-group">
             <input
-              type='text'
-              name='lastname'
-              placeholder='Last Name'
-              autoComplete='lastname'
+              type="text"
+              name="lastname"
+              placeholder="Last Name"
+              autoComplete="family-name"
               value={inputs.lastname}
               onChange={handleChange}
             />
-            <label htmlFor='lastname'>Last Name</label>
+            <label htmlFor="lastname">Last Name</label>
           </div>
-          <div className='field-group'>
+          <div className="field-group">
             <input
-              type='email'
-              name='email'
-              placeholder='Email'
-              autoComplete='email'
+              type="email"
+              name="email"
+              placeholder="Email"
+              autoComplete="email"
               value={inputs.email}
               onChange={handleChange}
             />
-            <label htmlFor='email'>Email</label>
+            <label htmlFor="email">Email</label>
           </div>
-          <div className='field-group'>
+          <div className="field-group">
             <input
-              type='password'
-              name='password'
-              placeholder='Password'
-              autoComplete='password'
+              type="password"
+              name="password"
+              placeholder="Password"
+              autoComplete="new-password"
               value={inputs.password}
               onChange={handleChange}
             />
-            <label htmlFor='password'>Password</label>
+            <label htmlFor="password">Password</label>
           </div>
-          <div className='field-group'>
+          <div className="field-group">
             <input
-              type='password'
-              name='confirm-password'
-              placeholder='Confirm Password'
-              autoComplete='confirm-password'
-              value={inputs['confirm-password']}
+              type="password"
+              name="confirm-password"
+              placeholder="Confirm Password"
+              autoComplete="new-password"
+              value={inputs["confirm-password"]}
               onChange={handleChange}
             />
-            <label htmlFor='confirm-password'>Confirm Password</label>
+            <label htmlFor="confirm-password">Confirm Password</label>
           </div>
 
           <button>Signup</button>

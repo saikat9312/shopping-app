@@ -1,8 +1,8 @@
-import React, { useContext } from 'react';
-import styled from 'styled-components';
+import React, { useContext } from "react";
+import styled from "styled-components";
 
-import { PlusCircleIcon, MinusCircleIcon, TrashIcon } from '../icons';
-import { CartContext } from '../../context/CartContext';
+import { PlusCircleIcon, MinusCircleIcon, TrashIcon } from "../../lib/icons";
+import { CartContext } from "../../context/CartContext";
 
 const ProductItemStyles = styled.div`
   display: flex;
@@ -103,7 +103,7 @@ export default function ProductItem({ product, handleAlert }) {
 
   const handleAddToCart = () => {
     (async function getProducts() {
-      const data = await fetch('./api/addToCart/index.post.json').then((res) =>
+      const data = await fetch("./api/addToCart/index.post.json").then((res) =>
         res.json()
       );
       handleAlert(data.response, data.responseMessage);
@@ -112,9 +112,9 @@ export default function ProductItem({ product, handleAlert }) {
   };
 
   return (
-    <ProductItemStyles className='ProductItem'>
+    <ProductItemStyles className="ProductItem">
       <h5>{product.name}</h5>
-      <div className='imgDesc'>
+      <div className="imgDesc">
         <img
           key={product.id}
           src={`..${product.imageURL}`}
@@ -122,31 +122,34 @@ export default function ProductItem({ product, handleAlert }) {
         />
         <p>{product.description}</p>
       </div>
-      <div className='Buy-Now'>
+      <div className="Buy-Now">
         <span>MRP Rs.{product.price}</span>
         <div>
           {isInCart(product) && (
-            <div className='productQuantity'>
-              {qty > 0 && (
-                <button
-                  className='shortButton'
-                  onClick={() => increase(product)}>
-                  <PlusCircleIcon width={'10px'} />
-                </button>
-              )}
-              <span className='qty'>{qty}</span>
+            <div className="productQuantity">
               {qty > 1 && (
                 <button
-                  className='shortButton'
-                  onClick={() => decrease(product)}>
-                  <MinusCircleIcon width={'10px'} />
+                  className="shortButton"
+                  onClick={() => decrease(product)}
+                >
+                  <MinusCircleIcon width={"10px"} />
                 </button>
               )}
               {qty === 1 && (
                 <button
-                  className='shortButton'
-                  onClick={() => removeProduct(product)}>
-                  <TrashIcon width={'10px'} />
+                  className="shortButton"
+                  onClick={() => removeProduct(product)}
+                >
+                  <TrashIcon width={"10px"} />
+                </button>
+              )}
+              <span className="qty">{qty}</span>
+              {qty > 0 && (
+                <button
+                  className="shortButton"
+                  onClick={() => increase(product)}
+                >
+                  <PlusCircleIcon width={"10px"} />
                 </button>
               )}
             </div>
@@ -155,7 +158,8 @@ export default function ProductItem({ product, handleAlert }) {
           {!isInCart(product) && (
             <button
               onClick={() => handleAddToCart(product)}
-              className='btn btn-primary btn-sm'>
+              className="btn btn-primary btn-sm"
+            >
               Buy Now
             </button>
           )}

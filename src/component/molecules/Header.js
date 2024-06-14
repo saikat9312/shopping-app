@@ -1,6 +1,6 @@
-import React from 'react';
-import styled from 'styled-components';
-import Nav from './fragments/Nav';
+import React from "react";
+import styled from "styled-components";
+import Nav from "../organism/Nav";
 
 const HeaderStyles = styled.header`
   height: 7rem;
@@ -39,15 +39,16 @@ const HeaderStyles = styled.header`
 function Header() {
   return (
     <HeaderStyles>
-      <div className='bar'>
+      <div className="bar">
         <h1>
           <img
-            srcSet='./logo_2x.png 480w,
-          ./logo.png 800w'
-            sizes='(max-width: 600px) 480px,
-         800px'
-            src='./logo_2x.png'
-            alt='SABKA BAZAAR'></img>
+            srcSet="./logo_2x.png 480w,
+          ./logo.png 800w"
+            sizes="(max-width: 600px) 480px,
+         800px"
+            src="./logo_2x.png"
+            alt="SABKA BAZAAR"
+          ></img>
         </h1>
         <Nav />
       </div>

@@ -1,5 +1,5 @@
-import styled from 'styled-components';
-import React from 'react';
+import styled from "styled-components";
+import React from "react";
 
 const SideNavStyles = styled.aside`
   background-color: #d3d3d3;
@@ -7,9 +7,9 @@ const SideNavStyles = styled.aside`
   button {
     padding: 10px 20px;
     text-decoration: none;
+    font-size: 12px;
     text-align: left;
     display: block;
-    /* color: black; */
   }
   .Categories {
     display: none;
@@ -18,9 +18,10 @@ const SideNavStyles = styled.aside`
     }
   }
   .DownArrow {
-    display: inline-block;
-    margin-left: 60%;
-    font-weight: bold;
+    position: absolute;
+    right: 2rem;
+    top: 7.5rem;
+    font-size: 1.6rem;
     transform: rotate(90deg);
   }
 
@@ -31,7 +32,6 @@ const SideNavStyles = styled.aside`
     .Categories {
       display: grid;
       background-color: #d3d3d3;
-      /* overflow-x: hidden; */
       button {
         padding: 10px 20px;
         text-decoration: none;
@@ -43,6 +43,9 @@ const SideNavStyles = styled.aside`
         &:hover {
           color: #f1f1f1;
           cursor: pointer;
+        }
+        &.selected {
+          background: #949494;
         }
       }
     }
@@ -63,25 +66,29 @@ export default function SideNav({
   itemNum,
   handleSelect,
   categoryData,
-  selectedFilterVal,
+  selectedFilterVal = "",
 }) {
   const [isOpen, setIsOpen] = React.useState(true);
   const [selectedFilter, setSelectedFilter] = React.useState(
-    selectedFilterVal ?? ''
+    selectedFilterVal ?? ""
   );
 
+  // Only handle mobile menu
   const handleDropdown = () => {
     setIsOpen(!isOpen);
-    let el = document.querySelector('.Categories');
-    !isOpen ? (el.style.display = 'none') : (el.style.display = 'block');
+    if (window.innerWidth < 601) {
+      let el = document.querySelector(".Categories");
+      !isOpen ? (el.style.display = "none") : (el.style.display = "block");
+    }
   };
+
   return (
     <SideNavStyles itemNum={itemNum}>
-      <button className='DropButton' onClick={handleDropdown}>
-        {selectedFilter !== '' ? selectedFilter : 'Select a category'}
-        <span className='DownArrow'>{'>'}</span>
+      <button className="DropButton" onClick={handleDropdown}>
+        {selectedFilter !== "" ? selectedFilter : "Select a category"}
+        <span className="DownArrow">{">"}</span>
       </button>
-      <div className='Categories'>
+      <div className="Categories">
         {categoryData.map((item) => (
           <button
             onClick={(e) => {
@@ -89,7 +96,9 @@ export default function SideNav({
               handleDropdown();
               handleSelect(e);
             }}
-            key={item.id}>
+            key={item.id}
+            className={`${selectedFilter === item.name ? "selected" : ""}`}
+          >
             {item.name}
           </button>
         ))}

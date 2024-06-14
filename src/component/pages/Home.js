@@ -1,11 +1,11 @@
-import React, { useContext } from 'react';
-import styled from 'styled-components';
-import Slider from 'react-slick';
-import 'slick-carousel/slick/slick.css';
-import 'slick-carousel/slick/slick-theme.css';
+import React, { useContext } from "react";
+import styled from "styled-components";
+import Slider from "react-slick";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 
-import HomeItem from '../component/fragments/HomeItem';
-import { CategoryContext } from '../context/ProductCategoryContext';
+import HomeItem from "../organism/HomeItem";
+import { CategoryContext } from "../../context/ProductCategoryContext";
 
 const HomeStyles = styled.div`
   margin: 3rem;
@@ -43,7 +43,7 @@ export default function Home() {
 
   React.useEffect(() => {
     (async function getImage() {
-      const data = await fetch('./api/banners/index.get.json').then((res) =>
+      const data = await fetch("./api/banners/index.get.json").then((res) =>
         res.json()
       );
       setCarouselData(data);
@@ -51,7 +51,7 @@ export default function Home() {
   }, []);
 
   return (
-    <HomeStyles className='Home'>
+    <HomeStyles className="Home">
       <Slider {...settings}>
         {carouselData.map((item) => (
           <img

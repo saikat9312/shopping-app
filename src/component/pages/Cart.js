@@ -1,9 +1,9 @@
-import React, { useContext } from 'react';
-import { Link } from 'react-router-dom';
-import styled from 'styled-components';
+import React, { useContext } from "react";
+import { Link } from "react-router-dom";
+import styled from "styled-components";
 
-import CartItem from '../component/fragments/CartItem';
-import { CartContext } from '../context/CartContext';
+import CartItem from "../organism/CartItem";
+import { CartContext } from "../../context/CartContext";
 
 const CartStyles = styled.div`
   display: flex;
@@ -76,45 +76,45 @@ const Cart = () => {
 
   return (
     <CartStyles>
-      <div className='Cart'>
-        <div className='CartItems'>
+      <div className="Cart">
+        <div className="CartItems">
           {cartItems.length > 0 ? (
             <>
               <TitleStyle>
-                My Cart ({itemCount} {itemCount > 1 ? 'items' : 'item'})
+                My Cart ({itemCount} {itemCount > 1 ? "items" : "item"})
               </TitleStyle>
               {cartItems.map((product) => (
                 <CartItem key={product.id} product={product} />
               ))}
               <LowestPriceAd>
-                <img src='./lowest-price.png' alt='Lowest Price Logo'></img>
+                <img src="./lowest-price.png" alt="Lowest Price Logo"></img>
                 <span>You won't find it cheaper anywhere</span>
               </LowestPriceAd>
             </>
           ) : (
-            <div className='EmptyCart'>
+            <div className="EmptyCart">
               <h2>No item in your cart</h2>
               <span>Your favourite items are just a click away</span>
-              <Link to='/products'>
+              <Link to="/products">
                 <button>Start Shopping</button>
               </Link>
             </div>
           )}
 
           {checkout && (
-            <div className='CheckoutSuccess'>
+            <div className="CheckoutSuccess">
               <p>Checkout successfull</p>
-              <Link to='/products'>BUY MORE</Link>
+              <Link to="/products">BUY MORE</Link>
             </div>
           )}
         </div>
 
         {cartItems.length > 0 && (
-          <div className='checkoutButton'>
+          <div className="checkoutButton">
             <button onClick={handleCheckout}>
               Proceed to Checkout
               <span>
-                Rs.{total} {' >'}
+                Rs.{total} {" >"}
               </span>
             </button>
             <button onClick={clearCart}>Clear</button>

@@ -1,8 +1,8 @@
-import React, { useContext } from 'react';
-import styled from 'styled-components';
+import React, { useContext } from "react";
+import styled from "styled-components";
 
-import { PlusCircleIcon, MinusCircleIcon, TrashIcon } from '../icons';
-import { CartContext } from '../../context/CartContext';
+import { PlusCircleIcon, MinusCircleIcon, TrashIcon } from "../../lib/icons";
+import { CartContext } from "../../context/CartContext";
 
 const CartItemStyles = styled.div`
   display: flex;
@@ -45,31 +45,31 @@ const CartItem = ({ product }) => {
 
   return (
     <CartItemStyles>
-      <div className='cartItemImg'>
+      <div className="cartItemImg">
         <img
           alt={product.name}
           src={product.imageURL}
-          className='img-fluid d-block'
+          className="img-fluid d-block"
         />
       </div>
-      <div className='cartItemDetail'>
+      <div className="cartItemDetail">
         <h5>{product.name}</h5>
-        <div className='itemQuantity'>
+        <div className="itemQuantity">
           <button onClick={() => increase(product)}>
-            <PlusCircleIcon width={'20px'} />
+            <PlusCircleIcon width={"20px"} />
           </button>
           <span>{product.quantity}</span>
           {product.quantity > 1 && (
             <button onClick={() => decrease(product)}>
-              <MinusCircleIcon width={'20px'} />
+              <MinusCircleIcon width={"20px"} />
             </button>
           )}
           {product.quantity === 1 && (
             <button onClick={() => removeProduct(product)}>
-              <TrashIcon width={'20px'} />
+              <TrashIcon width={"20px"} />
             </button>
           )}
-          <span className='multiply'>&#10006;</span>
+          <span className="multiply">&#10006;</span>
           <span>Rs.{product.price} </span>
         </div>
       </div>

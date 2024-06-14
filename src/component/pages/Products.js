@@ -1,10 +1,10 @@
-import React, { useContext, useState } from 'react';
-import styled from 'styled-components';
-import { useHistory } from 'react-router-dom';
-import { CategoryContext } from '../context/ProductCategoryContext';
-import ProductItem from '../component/fragments/ProductItem';
-import SideNav from '../component/fragments/SideNav';
-import Alert from '../component/Alert';
+import { useContext, useEffect, useState } from "react";
+import styled from "styled-components";
+import { useHistory } from "react-router-dom";
+import { CategoryContext } from "../../context/ProductCategoryContext";
+import ProductItem from "../organism/ProductItem";
+import SideNav from "../organism/SideNav";
+import Alert from "../molecules/Alert";
 
 const ProductStyles = styled.div`
   display: grid;
@@ -19,30 +19,14 @@ const ProductStyles = styled.div`
 `;
 
 export default function Products() {
-  const [productData, setProductData] = React.useState([]);
-  const [filterData, setFilterData] = React.useState([]);
+  const [productData, setProductData] = useState([]);
+  const [filterData, setFilterData] = useState([]);
 
   const [showAlert, setShowAlert] = useState(false);
   const [alertData, setAlertData] = useState({});
 
   const history = useHistory();
   const { categoryData } = useContext(CategoryContext);
-
-  React.useEffect(() => {
-    (async function getProducts() {
-      const data = await fetch('./api/products/index.get.json').then((res) =>
-        res.json()
-      );
-      setProductData(data);
-      setFilterData(data);
-    })();
-  }, []);
-
-  React.useEffect(() => {
-    if (history.location.state !== undefined && productData !== []) {
-      handleSelect(history.location.state);
-    }
-  }, [history.location.state, productData]);
 
   const handleSelect = (e) => {
     const filterName = e.target?.innerText ?? e;
@@ -60,8 +44,24 @@ export default function Products() {
     }, 3000);
   };
 
+  useEffect(() => {
+    (async function getProducts() {
+      const data = await fetch("./api/products/index.get.json").then((res) =>
+        res.json()
+      );
+      setProductData(data);
+      setFilterData(data);
+    })();
+  }, []);
+
+  useEffect(() => {
+    if (history.location.state !== undefined) {
+      handleSelect(history.location.state);
+    }
+  }, [history.location.state, productData]);
+
   return (
-    <ProductStyles className='Products'>
+    <ProductStyles className="Products">
       {showAlert ? <Alert {...alertData} /> : null}
       <SideNav
         itemNum={productData.length}

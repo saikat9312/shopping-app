@@ -1,17 +1,17 @@
-import React from 'react';
-import styled, { createGlobalStyle } from 'styled-components';
-import { Switch, Route, BrowserRouter as Router } from 'react-router-dom';
-import './App.css';
-import PrivateRoute from './component/PrivateRoute';
-import Footer from './component/Footer';
-import Header from './component/Header';
-import Home from './views/Home';
-import Products from './views/Products';
-import Cart from './views/Cart';
-import SignIn from './views/SignIn';
-import SignUp from './views/SignUp';
-import CategoryContextProvider from './context/ProductCategoryContext';
-import CartContextProvider from './context/CartContext';
+import React from "react";
+import styled, { createGlobalStyle } from "styled-components";
+import { Switch, Route, BrowserRouter as Router } from "react-router-dom";
+import "./App.css";
+import PrivateRoute from "./component/molecules/PrivateRoute";
+import Footer from "./component/molecules/Footer";
+import Header from "./component/molecules/Header";
+import Home from "./component/pages/Home";
+import Products from "./component/pages/Products";
+import Cart from "./component/pages/Cart";
+import SignIn from "./component/pages/SignIn";
+import SignUp from "./component/pages/SignUp";
+import CategoryContextProvider from "./context/ProductCategoryContext";
+import CartContextProvider from "./context/CartContext";
 
 const GlobalStyles = createGlobalStyle`
   @font-face {
@@ -82,28 +82,28 @@ const InnerStyles = styled.div`
 export default function App() {
   const routerRef = React.createRef();
 
-  const users = JSON.parse(localStorage.getItem('users'));
-  const isLoggedIn = JSON.parse(localStorage.getItem('isLoggedIn'));
+  const users = JSON.parse(localStorage.getItem("users"));
+  const isLoggedIn = JSON.parse(localStorage.getItem("isLoggedIn"));
 
   /* Initialize an empty array if the users array does not exist. */
-  users ?? localStorage.setItem('users', JSON.stringify([]));
+  users ?? localStorage.setItem("users", JSON.stringify([]));
 
   /* Initialize an flag to check logged in state */
-  isLoggedIn ?? localStorage.setItem('isLoggedIn', JSON.stringify(false));
+  isLoggedIn ?? localStorage.setItem("isLoggedIn", JSON.stringify(false));
 
   return (
-    <div className='App'>
+    <div className="App">
       <GlobalStyles />
       <CategoryContextProvider>
         <CartContextProvider>
           <Router ref={routerRef}>
             <Header />
             <Switch>
-              <Route exact path='/signin' component={SignIn} />
-              <Route exact path='/register' component={SignUp} />
-              <PrivateRoute exact path='/' component={Home} />
-              <PrivateRoute exact path='/products' component={Products} />
-              <PrivateRoute exact path='/cart' component={Cart} />
+              <Route exact path="/signin" component={SignIn} />
+              <Route exact path="/register" component={SignUp} />
+              <PrivateRoute exact path="/" component={Home} />
+              <PrivateRoute exact path="/products" component={Products} />
+              <PrivateRoute exact path="/cart" component={Cart} />
             </Switch>
           </Router>
           <Footer />
