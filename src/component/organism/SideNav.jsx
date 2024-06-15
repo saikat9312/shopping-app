@@ -2,6 +2,8 @@ import styled from "styled-components";
 import React from "react";
 
 const SideNavStyles = styled.aside`
+  position: sticky;
+  top: 7rem;
   background-color: #d3d3d3;
   overflow-x: hidden;
   button {
@@ -20,7 +22,7 @@ const SideNavStyles = styled.aside`
   .DownArrow {
     position: absolute;
     right: 2rem;
-    top: 7.5rem;
+    top: 0.5rem;
     font-size: 1.6rem;
     transform: rotate(90deg);
   }

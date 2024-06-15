@@ -4,7 +4,7 @@ import { Switch, Route, BrowserRouter as Router } from "react-router-dom";
 import "./App.css";
 import PrivateRoute from "./component/molecules/PrivateRoute";
 import Footer from "./component/molecules/Footer";
-import Header from "./component/molecules/Header";
+import Header from "./component/organism/Header";
 import Home from "./component/pages/Home";
 import Products from "./component/pages/Products";
 import Cart from "./component/pages/Cart";

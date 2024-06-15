@@ -6,9 +6,11 @@ import "slick-carousel/slick/slick-theme.css";
 
 import HomeItem from "../organism/HomeItem";
 import { CategoryContext } from "../../context/ProductCategoryContext";
+import { useGetData } from "../../lib/hooks/useGetData";
+import { CAROUSAL_SETTINGS } from "../../lib/constant";
 
 const HomeStyles = styled.div`
-  margin: 3rem;
+  margin: 1rem;
   .Home img {
     height: 30px;
   }
@@ -30,29 +32,15 @@ const HomeStyles = styled.div`
 export default function Home() {
   const [carouselData, setCarouselData] = React.useState([]);
   const { categoryData } = useContext(CategoryContext);
-
-  var settings = {
-    dots: true,
-    infinite: true,
-    autoplay: true,
-    autoplaySpeed: 3000,
-    speed: 500,
-    slidesToShow: 1,
-    slidesToScroll: 1,
-  };
+  const { loading, data, error } = useGetData("./api/banners/index.get.json");
 
   React.useEffect(() => {
-    (async function getImage() {
-      const data = await fetch("./api/banners/index.get.json").then((res) =>
-        res.json()
-      );
-      setCarouselData(data);
-    })();
-  }, []);
+    setCarouselData(data);
+  }, [data]);
 
   return (
     <HomeStyles className="Home">
-      <Slider {...settings}>
+      <Slider {...CAROUSAL_SETTINGS}>
         {carouselData.map((item) => (
           <img
             key={item.id}

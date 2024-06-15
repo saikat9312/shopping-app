@@ -5,6 +5,7 @@ import { CategoryContext } from "../../context/ProductCategoryContext";
 import ProductItem from "../organism/ProductItem";
 import SideNav from "../organism/SideNav";
 import Alert from "../molecules/Alert";
+import { useGetData } from "../../lib/hooks/useGetData";
 
 const ProductStyles = styled.div`
   display: grid;
@@ -24,6 +25,7 @@ export default function Products() {
 
   const [showAlert, setShowAlert] = useState(false);
   const [alertData, setAlertData] = useState({});
+  const { loading, data, error } = useGetData("./api/products/index.get.json");
 
   const history = useHistory();
   const { categoryData } = useContext(CategoryContext);
@@ -39,20 +41,12 @@ export default function Products() {
   const handleAlert = (type, message) => {
     setAlertData({ type, message });
     setShowAlert(true);
-    setTimeout(() => {
-      setShowAlert(false);
-    }, 3000);
   };
 
   useEffect(() => {
-    (async function getProducts() {
-      const data = await fetch("./api/products/index.get.json").then((res) =>
-        res.json()
-      );
-      setProductData(data);
-      setFilterData(data);
-    })();
-  }, []);
+    setProductData(data);
+    setFilterData(data);
+  }, [data]);
 
   useEffect(() => {
     if (history.location.state !== undefined) {
@@ -62,7 +56,13 @@ export default function Products() {
 
   return (
     <ProductStyles className="Products">
-      {showAlert ? <Alert {...alertData} /> : null}
+      {showAlert && (
+        <Alert
+          {...alertData}
+          showAlert={showAlert}
+          setAlert={(flag) => setShowAlert(flag)}
+        />
+      )}
       <SideNav
         itemNum={productData.length}
         handleSelect={handleSelect}

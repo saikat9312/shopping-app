@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import Nav from "../organism/Nav";
+import Nav from "./Nav";
 
 const HeaderStyles = styled.header`
   height: 7rem;
