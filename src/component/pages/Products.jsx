@@ -2,8 +2,8 @@ import { useContext, useEffect, useState } from "react";
 import styled from "styled-components";
 import { useHistory } from "react-router-dom";
 import { CategoryContext } from "../../context/ProductCategoryContext";
-import ProductItem from "../organism/ProductItem";
-import SideNav from "../organism/SideNav";
+import ProductItem from "../organisms/ProductItem";
+import SideNav from "../organisms/SideNav";
 import Alert from "../molecules/Alert";
 import { useGetData } from "../../lib/hooks/useGetData";
 
@@ -15,7 +15,6 @@ const ProductStyles = styled.div`
   }
   @media only screen and (min-width: 992px) {
     grid-template-columns: repeat(5, 18%);
-    margin: 0 10%;
   }
 `;
 
@@ -25,7 +24,9 @@ export default function Products() {
 
   const [showAlert, setShowAlert] = useState(false);
   const [alertData, setAlertData] = useState({});
-  const { loading, data, error } = useGetData("./api/products/index.get.json");
+  const { loading, data, error } = useGetData(
+    "./api/getProducts/index.get.json"
+  );
 
   const history = useHistory();
   const { categoryData } = useContext(CategoryContext);

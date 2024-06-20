@@ -4,7 +4,7 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
-import HomeItem from "../organism/HomeItem";
+import HomeItem from "../organisms/HomeItem";
 import { CategoryContext } from "../../context/ProductCategoryContext";
 import { useGetData } from "../../lib/hooks/useGetData";
 import { CAROUSAL_SETTINGS } from "../../lib/constant";
@@ -21,18 +21,13 @@ const HomeStyles = styled.div`
     position: absolute;
     bottom: 22px;
   }
-  @media only screen and (min-width: 600px) {
-    margin: 2rem 10rem;
-  }
-  @media only screen and (min-width: 992px) {
-  }
-  @media only screen and (min-width: 1200px) {
-  }
 `;
 export default function Home() {
   const [carouselData, setCarouselData] = React.useState([]);
   const { categoryData } = useContext(CategoryContext);
-  const { loading, data, error } = useGetData("./api/banners/index.get.json");
+  const { loading, data, error } = useGetData(
+    "./api/getBanners/index.get.json"
+  );
 
   React.useEffect(() => {
     setCarouselData(data);

@@ -19,8 +19,11 @@ const CartItemStyles = styled.div`
   }
   button {
     width: auto;
-    margin: 1rem;
+    margin: 0.5rem;
     border-radius: 25px;
+    @media only screen and (min-width: 600px) {
+      margin: 1rem;
+    }
   }
   .cartItemDetail {
     display: flex;
@@ -31,12 +34,21 @@ const CartItemStyles = styled.div`
       margin: 0;
     }
   }
+  .itemQuantityWrapper {
+    display: flex;
+    flex-direction: column;
+    @media only screen and (min-width: 600px) {
+      align-items: center;
+      justify-content: space-between;
+      flex-direction: row;
+    }
+  }
   .itemQuantity {
     display: flex;
     align-items: center;
   }
   .multiply {
-    margin: 0 10px;
+    margin: 0 0.5rem;
   }
 `;
 
@@ -54,28 +66,33 @@ const CartItem = ({ product }) => {
       </div>
       <div className="cartItemDetail">
         <h5>{product.name}</h5>
-        <div className="itemQuantity">
-          <button onClick={() => increase(product)}>
-            <PlusCircleIcon width={"20px"} />
-          </button>
-          <span>{product.quantity}</span>
-          {product.quantity > 1 && (
-            <button onClick={() => decrease(product)}>
-              <MinusCircleIcon width={"20px"} />
+        <div className="itemQuantityWrapper">
+          <div className="itemQuantity">
+            <button onClick={() => increase(product)}>
+              <PlusCircleIcon width={"20px"} />
             </button>
-          )}
-          {product.quantity === 1 && (
-            <button onClick={() => removeProduct(product)}>
-              <TrashIcon width={"20px"} />
-            </button>
-          )}
-          <span className="multiply">&#10006;</span>
-          <span>Rs.{product.price} </span>
+            <div>{product.quantity}</div>
+            {product.quantity > 1 && (
+              <button onClick={() => decrease(product)}>
+                <MinusCircleIcon width={"20px"} />
+              </button>
+            )}
+            {product.quantity === 1 && (
+              <button onClick={() => removeProduct(product)}>
+                <TrashIcon width={"20px"} />
+              </button>
+            )}
+            <div className="multiply">&#10006;</div>
+            <div>Rs.{product.price} </div>
+          </div>
+          <div>
+            <div>Total: Rs.{product.quantity * product.price} </div>
+          </div>
         </div>
       </div>
-      <div>
+      {/* <div>
         <span>Rs.{product.quantity * product.price} </span>
-      </div>
+      </div> */}
     </CartItemStyles>
   );
 };

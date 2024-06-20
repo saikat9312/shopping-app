@@ -35,13 +35,16 @@ const NavStyles = styled.nav`
     }
   }
   a {
-    padding: 1rem;
+    padding: 1rem 0.3rem;
     text-decoration: none;
     color: var(--gray);
   }
   @media only screen and (min-width: 600px) {
     .tab {
       margin-right: 15%;
+    }
+    a {
+      padding: 1rem;
     }
   }
   @media only screen and (min-width: 992px) {
@@ -92,13 +95,16 @@ export default function Nav() {
           )}
         </div>
         <Link to="/cart" className="navbar-item cart">
-          <img src="./cart.svg" alt="Cart"></img>
-          <>
+          <div>
+            <img src="./cart.svg" alt="Cart" />
+          </div>
+
+          <div>
             {localStorage &&
             JSON.parse(localStorage.getItem("isLoggedIn")) === true
               ? `${itemCount} item${itemCount > 1 ? "s" : ""}`
               : "Cart items"}
-          </>
+          </div>
         </Link>
       </div>
     </NavStyles>

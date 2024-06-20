@@ -1,17 +1,16 @@
 import React from "react";
 import styled, { createGlobalStyle } from "styled-components";
 import { Switch, Route, BrowserRouter as Router } from "react-router-dom";
-import "./App.css";
+
+import CategoryContextProvider from "./context/ProductCategoryContext";
+import CartContextProvider from "./context/CartContext";
 import PrivateRoute from "./component/molecules/PrivateRoute";
-import Footer from "./component/molecules/Footer";
-import Header from "./component/organism/Header";
 import Home from "./component/pages/Home";
 import Products from "./component/pages/Products";
 import Cart from "./component/pages/Cart";
 import SignIn from "./component/pages/SignIn";
 import SignUp from "./component/pages/SignUp";
-import CategoryContextProvider from "./context/ProductCategoryContext";
-import CartContextProvider from "./context/CartContext";
+import { Layout } from "./component/templates/Layout";
 
 const GlobalStyles = createGlobalStyle`
   @font-face {
@@ -97,16 +96,16 @@ export default function App() {
       <CategoryContextProvider>
         <CartContextProvider>
           <Router ref={routerRef}>
-            <Header />
-            <Switch>
-              <Route exact path="/signin" component={SignIn} />
-              <Route exact path="/register" component={SignUp} />
-              <PrivateRoute exact path="/" component={Home} />
-              <PrivateRoute exact path="/products" component={Products} />
-              <PrivateRoute exact path="/cart" component={Cart} />
-            </Switch>
+            <Layout>
+              <Switch>
+                <Route exact path="/signin" component={SignIn} />
+                <Route exact path="/register" component={SignUp} />
+                <PrivateRoute exact path="/" component={Home} />
+                <PrivateRoute exact path="/products" component={Products} />
+                <PrivateRoute exact path="/cart" component={Cart} />
+              </Switch>
+            </Layout>
           </Router>
-          <Footer />
         </CartContextProvider>
       </CategoryContextProvider>
       <InnerStyles />

@@ -1,14 +1,14 @@
-import React, { createContext, useState } from 'react';
+import React, { createContext, useEffect, useState } from "react";
 
 export const CategoryContext = createContext();
 
 const CategoryContextProvider = ({ children }) => {
   const [categoryData, setCategoryData] = useState([]);
 
-  React.useEffect(() => {
+  useEffect(() => {
     (async function getCategory() {
-      const data = await fetch('./api/categories/index.get.json').then((res) =>
-        res.json()
+      const data = await fetch("./api/getCategories/index.get.json").then(
+        (res) => res.json()
       );
       setCategoryData(data);
     })();
